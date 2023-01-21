@@ -2,6 +2,8 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import SwapiApi from './SwapiApi';
+import { Paper } from '@mui/material';
 
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
   color: theme.palette.common.white,
@@ -50,6 +52,21 @@ function ProductHeroLayout(props) {
           }}
         />
         <Background sx={props.sxBackground} />
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            opacity: 0.5,
+            '& > :not(style)': {
+              m: 1,
+              width: 256,
+              height: 256,
+            },
+          }}>
+          <Paper elevation={3}>
+            <SwapiApi />
+          </Paper>
+        </Box>
       </Container>
     </ProductHeroLayoutRoot>
   );
