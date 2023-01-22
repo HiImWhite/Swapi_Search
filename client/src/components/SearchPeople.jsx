@@ -5,6 +5,7 @@ function SearchPeople() {
   const [searchTerm, setSearchTerm] = useState('');
   const [people, setPeople] = useState([]);
   const [planets, setPlanets] = useState([]);
+  const [residents, setResidents] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,14 +36,14 @@ function SearchPeople() {
         return residents;
       }),
     );
+    const residents = planetResidents.flat();
+
     console.log(people);
     console.log(planets);
-    console.log(planetResidents.flat());
-    // setPeople(peopleResponse.data.results);
-    // setPlanets(planetResponse.data.results);
-    // console.log(searchTerm);
-    // console.log(peopleResponse.data.results);
-    // console.log(planetResponse.data.results);
+    console.log(residents);
+    setPeople(people);
+    setPlanets(planets);
+    setResidents(residents);
   };
 
   return (
