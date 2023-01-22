@@ -1,14 +1,14 @@
 import * as React from 'react';
-import AppFooter from '../components/AppFooter';
+import Footer from '../components/Footer';
 import ProductHero from '../components/ProductHero';
-import AppBar from '../components/AppBar';
+import Header from '../components/Header';
 
 function LandingPage() {
   return (
     <React.Fragment>
-      <AppBar />
+      <Header />
       <ProductHero />
-      <AppFooter />
+      <Footer />
     </React.Fragment>
   );
 }
