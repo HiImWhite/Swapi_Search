@@ -2,8 +2,8 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import SwapiApi from './SwapiApi';
 import { Paper } from '@mui/material';
+import SearchPeople from './SearchPeople';
 
 const ProductHeroLayoutRoot = styled('section')(({ theme }) => ({
   color: theme.palette.common.white,
@@ -64,7 +64,7 @@ function ProductHeroLayout(props) {
             },
           }}>
           <Paper elevation={3}>
-            <SwapiApi />
+            <SearchPeople />
           </Paper>
         </Box>
       </Container>
