@@ -59,8 +59,8 @@ function ProductHeroLayout(props) {
             opacity: 0.5,
             '& > :not(style)': {
               m: 1,
-              width: 256,
-              height: 256,
+              width: 512,
+              height: 512,
             },
           }}>
           <Paper elevation={3}>

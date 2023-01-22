@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import DisplayPeople from './DisplayPeople';
+
 function SearchPeople() {
   const [searchTerm, setSearchTerm] = useState('');
   const [people, setPeople] = useState([]);
@@ -60,6 +62,7 @@ function SearchPeople() {
         </label>
         <button type='submit'>Search</button>
       </form>
+      <DisplayPeople people={people} residents={residents} />
     </>
   );
 }
