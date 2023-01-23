@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import DisplayPeople from './DisplayPeople';
@@ -9,48 +9,61 @@ function SearchPeople() {
   const [planets, setPlanets] = useState([]);
   const [residents, setResidents] = useState([]);
 
-  const handleSubmit = (e) => {
+  const firstRender = useRef(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let nextPage = `https://swapi.dev/api/planets`;
+      if (!firstRender.current) {
+        while (nextPage) {
+          const res = await axios.get(nextPage);
+          setPlanets((prevPlanets) => [...prevPlanets, ...res.data.results]);
+          nextPage = res.data.next;
+        }
+      }
+    };
+    fetchData();
+    firstRender.current = true;
+  }, []);
+
+  const handleSearch = async (e) => {
     e.preventDefault();
     setSearchTerm(e.target.search.value);
-    fetchData();
     console.log(searchTerm);
-  };
 
-  const fetchData = async () => {
     const peoplePromise = axios.get(
       `https://swapi.dev/api/people?search=${searchTerm}`,
     );
-    const planetPromise = axios.get(
-      `https://swapi.dev/api/planets?search=${searchTerm}`,
+
+    const filteredPlanets = planets.filter(
+      (planet) =>
+        planet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        planet.population.includes(searchTerm),
     );
 
-    const result = await Promise.all([peoplePromise, planetPromise]);
+    const residentsPromises = filteredPlanets.map(async (planet) => {
+      const residentUrls = planet.residents;
+      const residentResponses = await Promise.all(
+        residentUrls.map((url) => axios.get(url)),
+      );
+      return residentResponses.map((res) => res.data);
+    });
 
-    const people = result[0].data.results;
-    const planets = result[1].data.results;
-    const planetResidents = await Promise.all(
-      planets.map(async (planet) => {
-        const residentsPromise = planet.residents.map(async (residentUrl) => {
-          const residentResponse = await axios.get(residentUrl);
-          return residentResponse.data;
-        });
-        const residents = await Promise.all(residentsPromise);
-        return residents;
-      }),
-    );
-    const residents = planetResidents.flat();
+    const people = await peoplePromise;
+    const residents = await Promise.all(residentsPromises);
 
-    console.log(people);
-    console.log(planets);
-    console.log(residents);
-    setPeople(people);
-    setPlanets(planets);
-    setResidents(residents);
+    const flatResidents = residents.flat();
+    const peopleResults = people.data.results;
+    // Update state with search results
+    setPeople(peopleResults);
+    setResidents(flatResidents);
+    console.log(peopleResults);
+    console.log(flatResidents);
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSearch}>
         <label>
           Search:
           <input
