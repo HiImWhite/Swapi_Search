@@ -18,13 +18,13 @@ function DisplayPeople({ characters, loader }) {
 
   return (
     <Box height='90%' overflow='auto'>
-      <Typography variant='h5'>Characters</Typography>
       <Box
         display='flex'
         justifyContent='center'
         alignItems='center'
         flexDirection='column'
         height='fit-content'>
+        <Typography variant='h5'>Characters</Typography>
         {characters.length > 0 ? (
           <Box display='flex' flexDirection='column' gap='0.5rem'>
             {characters.map((person) => (

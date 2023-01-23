@@ -4,6 +4,7 @@ import axios from 'axios';
 import Box from '@mui/material/Box';
 
 import DisplayPeople from './DisplayPeople';
+import { textAlign } from '@mui/system';
 
 const joinArraysAndDeleteDuplicates = (arr1, arr2) => {
   return [...arr1, ...arr2].filter(
@@ -72,24 +73,17 @@ function SearchPeople() {
   };
 
   return (
-    <Box
-      justifyContent='center'
-      alignItems='center'
-      width='100%'
-      flexDirection='column'
-      gap='1rem'
-      height='100%'
-      py='1rem'>
-      <form onSubmit={handleSearch} style={{ width: '100%' }}>
-        <label>
-          Search:
-          <input
-            type='text'
-            name='search'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </label>
+    <Box width='100%' flexDirection='column' gap='1rem' height='100%' py='1rem'>
+      <form
+        onSubmit={handleSearch}
+        style={{ width: '100%', textAlign: 'center', marginBottom: '5px' }}>
+        <input
+          type='text'
+          name='search'
+          style={{ backgroundColor: 'LightGray', marginRight: '4px' }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         <button type='submit'>Search</button>
       </form>
       <DisplayPeople loader={loader} characters={characters} />
