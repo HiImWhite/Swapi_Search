@@ -34,6 +34,12 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
     }
   }, [selectedCharacter]);
 
+  useEffect(() => {
+    if (!handleOpen) {
+      setFilms([]);
+    }
+  }, [handleOpen]);
+
   return (
     <Modal open={handleOpen} onClose={handleCloseModal}>
       <Box sx={style}>

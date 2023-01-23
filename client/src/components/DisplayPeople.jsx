@@ -14,7 +14,9 @@ function DisplayPeople({ characters, loader }) {
     setSelectedCharacter(person);
   };
 
-  const handleCloseModal = () => setDisplayModal(false);
+  const handleCloseModal = () => {
+    setDisplayModal(false);
+  };
 
   return (
     <Box height='90%' overflow='auto'>

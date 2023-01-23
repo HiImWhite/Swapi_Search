@@ -56,14 +56,14 @@ function ProductHeroLayout(props) {
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
-            opacity: 0.5,
+            opacity: 0.8,
             '& > :not(style)': {
               m: 1,
               width: 512,
               height: 512,
             },
           }}>
-          <Paper elevation={3}>
+          <Paper sx={{ bgcolor: 'gray' }} elevation={3}>
             <SearchPeople />
           </Paper>
         </Box>
