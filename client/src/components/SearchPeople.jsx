@@ -1,13 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
+import Box from '@mui/material/Box';
+
 import DisplayPeople from './DisplayPeople';
+
+const joinArraysAndDeleteDuplicates = (arr1, arr2) => {
+  return [...arr1, ...arr2].filter(
+    (v, i, a) =>
+      a.findIndex((v2) => ['name'].every((k) => v2[k] === v[k])) === i,
+  );
+};
 
 function SearchPeople() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [people, setPeople] = useState([]);
+  const [characters, setCharacters] = useState([]);
+  const [loader, setLoader] = useState(false);
   const [planets, setPlanets] = useState([]);
-  const [residents, setResidents] = useState([]);
 
   const firstRender = useRef(false);
 
@@ -27,22 +36,23 @@ function SearchPeople() {
   }, []);
 
   const handleSearch = async (e) => {
+    setLoader(true);
+    const { value } = e.target.search;
     e.preventDefault();
-    setSearchTerm(e.target.search.value);
-    console.log(searchTerm);
+    setSearchTerm(value);
 
     const peoplePromise = axios.get(
       `https://swapi.dev/api/people?search=${searchTerm}`,
     );
 
     const filteredPlanets = planets.filter(
-      (planet) =>
-        planet.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        planet.population.includes(searchTerm),
+      ({ name, population }) =>
+        name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        population.includes(searchTerm),
     );
 
-    const residentsPromises = filteredPlanets.map(async (planet) => {
-      const residentUrls = planet.residents;
+    const residentsPromises = filteredPlanets.map(async ({ residents }) => {
+      const residentUrls = residents;
       const residentResponses = await Promise.all(
         residentUrls.map((url) => axios.get(url)),
       );
@@ -51,19 +61,26 @@ function SearchPeople() {
 
     const people = await peoplePromise;
     const residents = await Promise.all(residentsPromises);
-
     const flatResidents = residents.flat();
     const peopleResults = people.data.results;
-    // Update state with search results
-    setPeople(peopleResults);
-    setResidents(flatResidents);
-    console.log(peopleResults);
-    console.log(flatResidents);
+    const joinedArray = joinArraysAndDeleteDuplicates(
+      peopleResults,
+      flatResidents,
+    );
+    setCharacters(joinedArray);
+    setLoader(false);
   };
 
   return (
-    <>
-      <form onSubmit={handleSearch}>
+    <Box
+      justifyContent='center'
+      alignItems='center'
+      width='100%'
+      flexDirection='column'
+      gap='1rem'
+      height='100%'
+      py='1rem'>
+      <form onSubmit={handleSearch} style={{ width: '100%' }}>
         <label>
           Search:
           <input
@@ -75,8 +92,8 @@ function SearchPeople() {
         </label>
         <button type='submit'>Search</button>
       </form>
-      <DisplayPeople people={people} residents={residents} />
-    </>
+      <DisplayPeople loader={loader} characters={characters} />
+    </Box>
   );
 }
 
