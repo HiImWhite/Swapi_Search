@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Swapi_Search/static/css/main.a240c550.css",
-    "main.js": "/Swapi_Search/static/js/main.2b21b7b3.js",
+    "main.js": "/Swapi_Search/static/js/main.05f08c08.js",
     "index.html": "/Swapi_Search/index.html",
     "main.a240c550.css.map": "/Swapi_Search/static/css/main.a240c550.css.map",
-    "main.2b21b7b3.js.map": "/Swapi_Search/static/js/main.2b21b7b3.js.map"
+    "main.05f08c08.js.map": "/Swapi_Search/static/js/main.05f08c08.js.map"
   },
   "entrypoints": [
     "static/css/main.a240c550.css",
-    "static/js/main.2b21b7b3.js"
+    "static/js/main.05f08c08.js"
   ]
 }
