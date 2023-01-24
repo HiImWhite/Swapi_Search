@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-const PageWrapper = (props) => {
+const PageWrapper = ({ text, component }) => {
   return (
-    <Box component='footer' padding={3} sx={{ bgcolor: 'gray' }}>
+    <Box component={component} padding={3} sx={{ bgcolor: 'gray' }}>
       <Container maxWidth='lg'>
         <Box display='flex' justifyContent='space-around' flexWrap='wrap'>
           <Typography
@@ -13,7 +13,7 @@ const PageWrapper = (props) => {
             variant='h6'
             textTransform='capitalize'
             fontWeight={700}>
-            {props.text}
+            {text}
           </Typography>
         </Box>
       </Container>

@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
+
 import axios from 'axios';
 
 const style = {
@@ -25,6 +26,7 @@ const style = {
 
 function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
   const [films, setFilms] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!handleOpen) {
@@ -34,12 +36,14 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
 
   useEffect(() => {
     if (selectedCharacter) {
+      setIsLoading(true);
       const fetchFilms = async () => {
         const filmPromises = selectedCharacter.films.map((filmUrl) =>
           axios.get(filmUrl),
         );
         const filmResponses = await Promise.all(filmPromises);
         setFilms(filmResponses.map((response) => response.data));
+        setIsLoading(false);
       };
       fetchFilms();
     }
@@ -66,13 +70,18 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
                   <Box key={film.title}>
                     <Typography>Title: {film.title}</Typography>
                     <Typography>Release Date: {film.release_date}</Typography>
-                    <Typography>
-                      Opening Crawl: {film.opening_crawl.slice(0, 130) + '...'}
-                    </Typography>
+                    <Box display='flex'>
+                      <Typography>
+                        Opening Crawl:{' '}
+                        {film.opening_crawl.slice(0, 130) + '...'}
+                      </Typography>
+                    </Box>
                   </Box>
                 ))
-              ) : (
+              ) : isLoading ? (
                 <CircularProgress />
+              ) : (
+                <Typography>No data.</Typography>
               )}
             </Box>
           </>

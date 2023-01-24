@@ -5,9 +5,12 @@ import ProductHero from '../components/ProductHero';
 function LandingPage() {
   return (
     <React.Fragment>
-      <PageWrapper text='Star Wars search app. ' />
+      <PageWrapper text='Star Wars search app. ' component='header' />
       <ProductHero />
-      <PageWrapper text='“Always pass on what you have learned.” — Yoda' />
+      <PageWrapper
+        text='“Always pass on what you have learned.” — Yoda'
+        component='footer'
+      />
     </React.Fragment>
   );
 }

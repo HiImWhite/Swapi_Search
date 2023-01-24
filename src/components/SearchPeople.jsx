@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import Box from '@mui/material/Box';
-
+import Button from '@mui/material/Button';
 import DisplayPeople from './DisplayPeople';
 
 const joinArraysAndDeleteDuplicates = (arr1, arr2) => {
@@ -77,21 +77,30 @@ function SearchPeople() {
       width='100%'
       display='flex'
       flexDirection='column'
-      gap='1rem'
+      gap='0.5rem'
       height='100%'
-      py='1rem'>
-      <form
+      py='0.5rem'>
+      <Box
+        component='form'
         onSubmit={handleSearch}
-        style={{ width: '100%', textAlign: 'center', marginBottom: '5px' }}>
-        <input
+        display='flex'
+        flexDirection='row'
+        gap='0.5rem'
+        justifyContent='center'
+        width='100%'>
+        <Box
           type='text'
+          component='input'
           name='search'
-          style={{ backgroundColor: 'LightGray', marginRight: '4px' }}
+          width='40%'
+          bgcolor='LightGray'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button type='submit'>Search</button>
-      </form>
+        <Button type='submit' variant='contained' sx={{ width: '40%' }}>
+          Search
+        </Button>
+      </Box>
       <DisplayPeople loader={loader} characters={characters} />
     </Box>
   );

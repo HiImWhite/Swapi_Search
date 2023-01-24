@@ -20,7 +20,7 @@ function DisplayPeople({ characters, loader }) {
   };
 
   return (
-    <Box height='90%' overflow='auto'>
+    <Box height='89.5%' overflow='auto'>
       <Box
         display='flex'
         justifyContent='center'
@@ -28,7 +28,7 @@ function DisplayPeople({ characters, loader }) {
         flexDirection='column'
         height='fit-content'>
         <Typography variant='h5'>Characters</Typography>
-        {characters.length > 0 ? (
+        {characters.length > 0 && !loader ? (
           <Box display='flex' flexDirection='column' gap='0.5rem'>
             {characters.map((person) => (
               <Box key={person.name}>
