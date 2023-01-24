@@ -70,6 +70,7 @@ function SearchPeople() {
     );
     setCharacters(joinedArray);
     setLoader(false);
+    setSearchTerm('');
   };
 
   return (
