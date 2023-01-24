@@ -59,7 +59,11 @@ function ProductHeroLayout(props) {
             opacity: 0.8,
             '& > :not(style)': {
               m: 1,
-              width: 512,
+              width: {
+                xs: 300,
+                sm: 400,
+                md: 512,
+              },
               height: 512,
             },
           }}>

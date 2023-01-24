@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,7 +11,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: {
+    xs: 250,
+    sm: 400,
+    md: 512,
+  },
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -20,6 +25,12 @@ const style = {
 
 function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
   const [films, setFilms] = useState([]);
+
+  useEffect(() => {
+    if (!handleOpen) {
+      setFilms([]);
+    }
+  }, [handleOpen]);
 
   useEffect(() => {
     if (selectedCharacter) {
@@ -33,12 +44,6 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
       fetchFilms();
     }
   }, [selectedCharacter]);
-
-  useEffect(() => {
-    if (!handleOpen) {
-      setFilms([]);
-    }
-  }, [handleOpen]);
 
   return (
     <Modal open={handleOpen} onClose={handleCloseModal}>
@@ -56,15 +61,19 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
             <Typography>Name: {selectedCharacter.name}</Typography>
             <Typography>Films:</Typography>
             <Box display='flex' flexDirection='column' gap='0.5rem'>
-              {films.map((film) => (
-                <Box key={film.title}>
-                  <Typography>Title: {film.title}</Typography>
-                  <Typography>Release Date: {film.release_date}</Typography>
-                  <Typography>
-                    Opening Crawl: {film.opening_crawl.slice(0, 130) + '...'}
-                  </Typography>
-                </Box>
-              ))}
+              {films.length > 0 ? (
+                films.map((film) => (
+                  <Box key={film.title}>
+                    <Typography>Title: {film.title}</Typography>
+                    <Typography>Release Date: {film.release_date}</Typography>
+                    <Typography>
+                      Opening Crawl: {film.opening_crawl.slice(0, 130) + '...'}
+                    </Typography>
+                  </Box>
+                ))
+              ) : (
+                <CircularProgress />
+              )}
             </Box>
           </>
         )}

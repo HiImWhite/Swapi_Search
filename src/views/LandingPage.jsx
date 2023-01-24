@@ -1,14 +1,13 @@
 import * as React from 'react';
-import Footer from '../components/Footer';
+import PageWrapper from '../components/PageWrapper';
 import ProductHero from '../components/ProductHero';
-import Header from '../components/Header';
 
 function LandingPage() {
   return (
     <React.Fragment>
-      <Header />
+      <PageWrapper text='Star Wars search app' />
       <ProductHero />
-      <Footer />
+      <PageWrapper text='“Always pass on what you have learned.” — Yoda' />
     </React.Fragment>
   );
 }

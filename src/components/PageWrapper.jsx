@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-const Footer = () => {
+const PageWrapper = (props) => {
   return (
     <Box component='footer' padding={3} sx={{ bgcolor: 'gray' }}>
       <Container maxWidth='lg'>
@@ -13,7 +13,7 @@ const Footer = () => {
             variant='h5'
             textTransform='capitalize'
             fontWeight={700}>
-            “Always pass on what you have learned.” — Yoda
+            {props.text}
           </Typography>
         </Box>
       </Container>
@@ -21,4 +21,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default PageWrapper;

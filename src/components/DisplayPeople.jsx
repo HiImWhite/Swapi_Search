@@ -16,6 +16,7 @@ function DisplayPeople({ characters, loader }) {
 
   const handleCloseModal = () => {
     setDisplayModal(false);
+    setSelectedCharacter(null);
   };
 
   return (
