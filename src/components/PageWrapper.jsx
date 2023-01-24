@@ -9,8 +9,8 @@ const PageWrapper = (props) => {
       <Container maxWidth='lg'>
         <Box display='flex' justifyContent='space-around' flexWrap='wrap'>
           <Typography
-            component='h5'
-            variant='h5'
+            component='h6'
+            variant='h6'
             textTransform='capitalize'
             fontWeight={700}>
             {props.text}

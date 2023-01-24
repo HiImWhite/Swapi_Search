@@ -43,7 +43,11 @@ function DisplayPeople({ characters, loader }) {
         ) : loader ? (
           <CircularProgress />
         ) : (
-          <Typography>No data</Typography>
+          <Typography width='170px' variant='paragraph' align='center'>
+            No data. <br />
+            Search characters by character name, homeworld name, homeworld
+            population.
+          </Typography>
         )}
       </Box>
       <InfoModal
