@@ -47,7 +47,7 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
 
   return (
     <Modal open={handleOpen} onClose={handleCloseModal}>
-      <Box sx={style}>
+      <Box sx={style} style={{ height: '80%', overflow: 'auto' }}>
         {selectedCharacter && (
           <>
             <CloseIcon
