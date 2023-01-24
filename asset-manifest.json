@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Swapi_Search/static/css/main.a240c550.css",
+    "main.js": "/Swapi_Search/static/js/main.426b4637.js",
+    "index.html": "/Swapi_Search/index.html",
+    "main.a240c550.css.map": "/Swapi_Search/static/css/main.a240c550.css.map",
+    "main.426b4637.js.map": "/Swapi_Search/static/js/main.426b4637.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a240c550.css",
+    "static/js/main.426b4637.js"
+  ]
+}
