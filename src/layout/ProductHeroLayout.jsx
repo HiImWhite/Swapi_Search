@@ -1,7 +1,7 @@
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import SearchPeople from './SearchPeople';
+import SearchPeople from '../components/SearchPeople';
 import Background from './Background';
 import ProductHeroLayoutRoot from './ProductHeroLayoutRoot';
 
