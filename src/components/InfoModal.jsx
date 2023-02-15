@@ -64,7 +64,12 @@ function InfoModal({ handleOpen, selectedCharacter, handleCloseModal }) {
             />
             <Typography>Name: {selectedCharacter.name}</Typography>
             <Typography>Films:</Typography>
-            <Box display='flex' flexDirection='column' gap='0.5rem'>
+            <Box
+              display='flex'
+              flexDirection='column'
+              justifyContent='center'
+              alignItems='center'
+              gap='0.5rem'>
               {films.length > 0 ? (
                 films.map((film) => (
                   <Box key={film.title}>
