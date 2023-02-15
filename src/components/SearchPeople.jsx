@@ -53,10 +53,11 @@ function SearchPeople() {
 
     const residentsPromises = filteredPlanets.map(async ({ residents }) => {
       const residentUrls = residents;
-      const residentResponses = await Promise.all(
-        residentUrls.map((url) => axios.get(url)),
+      const residentRequests = residentUrls.map((url) => axios.get(url));
+
+      return Promise.all(residentRequests).then((responses) =>
+        responses.map((res) => res.data),
       );
-      return residentResponses.map((res) => res.data);
     });
 
     const people = await peoplePromise;
