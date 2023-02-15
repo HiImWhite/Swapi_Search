@@ -1,6 +1,6 @@
 import * as React from 'react';
-import PageWrapper from '../components/PageWrapper';
-import ProductHero from '../components/ProductHero';
+import PageWrapper from '../layout/PageWrapper';
+import ProductHero from '../layout/ProductHero';
 
 function LandingPage() {
   return (
